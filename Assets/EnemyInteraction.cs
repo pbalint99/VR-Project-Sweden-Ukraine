@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class EnemyInteraction : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class EnemyInteraction : MonoBehaviour
     private int hitCount = 0;
     private float hitCooldown = 0.1f;
     private float hitTimer = 0.0f;
+    public ParticleSystem particleSystem;
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +40,7 @@ public class EnemyInteraction : MonoBehaviour
             // If the colliding object has a Rigidbody, increment the hit count and start the cooldown timer
             hitCount++;
             hitTimer = Time.time;
+            StartCoroutine(ActivateParticles());
 
             // If the hit count is greater than or equal to 10, destroy the enemy
             if (hitCount >= 10)
@@ -51,5 +54,12 @@ public class EnemyInteraction : MonoBehaviour
                 isColliding = true;
             }
         }
+    }
+
+    private IEnumerator ActivateParticles() {
+        particleSystem.Play();
+        yield return new WaitForSeconds(1f);
+        particleSystem.Stop();
+        particleSystem.Clear();
     }
 }

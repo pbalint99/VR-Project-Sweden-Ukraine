@@ -6,7 +6,7 @@ public class CylinderSoundEffect : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "Capsule")
+        if (collision.gameObject.name == "Enemy")
         {
             //Debug.Log("Capsule collided with Cylinder");
             audioSource.Play();
