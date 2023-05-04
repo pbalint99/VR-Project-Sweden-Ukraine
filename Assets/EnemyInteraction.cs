@@ -1,11 +1,13 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class EnemyInteraction : MonoBehaviour {
     //private Renderer renderer;
     private Color originalColor;
     //private bool isColliding = false;
     private int hitCount = 0;
+    public int hitsToDie = 20;
     private float hitCooldown = 1f;
     private float hitTimer = 0.0f;
     public ParticleSystem particleSystem;
@@ -13,6 +15,11 @@ public class EnemyInteraction : MonoBehaviour {
     public float movementSpeed = 5.0f;
     private bool isWalking = false;
     bool isHit = false;
+    public Image heartFill;
+    public GameObject player;
+    public float distanceToNoticePlayer;
+    public float rotationSpeed = 5.0f;
+    bool facingPlayer = false;
 
     // Start is called before the first frame update
     void Start() {
@@ -42,6 +49,28 @@ public class EnemyInteraction : MonoBehaviour {
                 animator.SetBool("isWalking", false);
             }
         }
+
+        //If the player is close face them
+        float distance = (player.transform.position - gameObject.transform.position).magnitude;
+        if(distance<distanceToNoticePlayer) {
+            // Calculate the direction from the enemy to the player
+            Vector3 direction = player.transform.position - transform.position;
+
+            // Calculate the desired rotation of the enemy, only around the Y axis
+            Quaternion targetRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+
+            // Smoothly rotate the enemy toward the player using Lerp
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        }
+
+        if(Input.GetKeyDown(KeyCode.K)) {
+            hitCount = hitsToDie;
+        }
+
+        // If the hit count is greater than or equal to hitsToDie, destroy the enemy
+        if (hitCount >= hitsToDie) {
+            
+        }
     }
 
     // This method is called when a collision occurs with the enemy's collider
@@ -60,19 +89,13 @@ public class EnemyInteraction : MonoBehaviour {
         Rigidbody otherRb = collision.gameObject.GetComponent<Rigidbody>();
         if (otherRb != null && Time.time >= hitTimer + hitCooldown) {
             // If the colliding object has a Rigidbody, increment the hit count and start the cooldown timer
-            hitCount++;
+            if(name == "HandColliderRight(Clone)" || name == "HandColliderLeft(Clone)")
+                hitCount++;
+            else {
+                hitCount += 2;
+            }
             hitTimer = Time.time;
             StartCoroutine(ManageHitEffects());
-
-            // If the hit count is greater than or equal to 10, destroy the enemy
-            if (hitCount >= 10) {
-                Destroy(gameObject);
-            } else {
-                // Otherwise, change the color of the enemy to red and set isColliding to true
-                //renderer.material.color = Color.red;
-                //isColliding = true;
-
-            }
         }
     }
 
@@ -80,6 +103,7 @@ public class EnemyInteraction : MonoBehaviour {
         particleSystem.Play();
         animator.SetBool("isHit", true);
         isHit = true;
+        heartFill.fillAmount = 1 - (float)hitCount / hitsToDie;
         yield return new WaitForSeconds(1f);
         animator.SetBool("isHit", false);
         particleSystem.Stop();
