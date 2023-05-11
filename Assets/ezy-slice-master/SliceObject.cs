@@ -1,5 +1,6 @@
 using EzySlice;
 using UnityEngine;
+using System.Collections;
 
 
 public class SliceObject : MonoBehaviour {
@@ -8,8 +9,18 @@ public class SliceObject : MonoBehaviour {
     public float exposionRadius;
     public bool gravity, kinematic;
 
+    private bool canSlice = true;
+
+    private IEnumerator ResetCanSlice()
+    {
+        yield return new WaitForSeconds(0.3f);
+        canSlice = true;
+    }
+
     private void OnTriggerEnter(Collider other) {
-        if (other.gameObject.CompareTag("CanSlice")) {
+        if (canSlice && other.gameObject.CompareTag("CanSlice")) {
+            canSlice = false;
+            StartCoroutine(ResetCanSlice());
             SlicedHull sliceobj = Slice(other.gameObject, materialSlicedSide);
             GameObject SlicedObjTop = sliceobj.CreateUpperHull(other.gameObject, materialSlicedSide);
             GameObject SlicedObjDown = sliceobj.CreateLowerHull(other.gameObject, materialSlicedSide);
