@@ -28,7 +28,9 @@ public class SliceObject : MonoBehaviour {
     void AddComponent(GameObject obj) {
         obj.AddComponent<BoxCollider>();
         var rigidbody = obj.AddComponent<Rigidbody>();
-        rigidbody.useGravity = gravity;
+        rigidbody.position = transform.position;
+        //rigidbody.useGravity = gravity;
+        rigidbody.useGravity = true;
         rigidbody.isKinematic = kinematic;
         rigidbody.AddExplosionForce(explosionForce, obj.transform.position, exposionRadius);
         obj.tag = "CanSlice";
