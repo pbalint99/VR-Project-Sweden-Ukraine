@@ -43,11 +43,25 @@
     {
       "name": "/actions/default/in/SnapTurnLeft",
       "type": "boolean",
-      "requirement": "suggested"
+      "requirement": "optional"
     },
     {
       "name": "/actions/default/in/SnapTurnRight",
-      "type": "boolean"
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/default/in/Thumbstick",
+      "type": "vector2"
+    },
+    {
+      "name": "/actions/default/in/moving",
+      "type": "vector2"
+    },
+    {
+      "name": "/actions/default/in/movement",
+      "type": "vector2",
+      "requirement": "suggested"
     },
     {
       "name": "/actions/default/out/Haptic",
