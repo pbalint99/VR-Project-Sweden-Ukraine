@@ -67,10 +67,7 @@ public class EnemyInteraction : MonoBehaviour {
             hitCount = hitsToDie;
         }
 
-        // If the hit count is greater than or equal to hitsToDie, destroy the enemy
-        if (hitCount >= hitsToDie) {
-            
-        }
+        
     }
 
     // This method is called when a collision occurs with the enemy's collider
@@ -108,6 +105,11 @@ public class EnemyInteraction : MonoBehaviour {
         animator.SetBool("isHit", false);
         particleSystem.Stop();
         particleSystem.Clear();
+        // If the hit count is greater than or equal to hitsToDie, destroy the enemy
+        if (hitCount >= hitsToDie)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     private void Walk() {

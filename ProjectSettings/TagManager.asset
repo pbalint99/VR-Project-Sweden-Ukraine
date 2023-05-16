@@ -8,6 +8,7 @@ TagManager:
   - FxTemporaire
   - CanSlice
   - Flower
+  - Wood
   layers:
   - Default
   - TransparentFX
