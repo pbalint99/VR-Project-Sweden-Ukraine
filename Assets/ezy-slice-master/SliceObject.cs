@@ -18,11 +18,15 @@ public class SliceObject : MonoBehaviour {
         canSlice = true;
     }
 
+
+
     private void OnTriggerEnter(Collider other) {
         if (canSlice && other.gameObject.CompareTag("CanSlice")) {
             canSlice = false;
             StartCoroutine(ResetCanSlice());
+            
             SlicedHull sliceobj = Slice(other.gameObject, materialSlicedSide);
+
             GameObject SlicedObjTop = sliceobj.CreateUpperHull(other.gameObject, materialSlicedSide);
             GameObject SlicedObjDown = sliceobj.CreateLowerHull(other.gameObject, materialSlicedSide);
             Destroy(other.gameObject);
@@ -32,9 +36,13 @@ public class SliceObject : MonoBehaviour {
     }
 
 
-    private SlicedHull Slice(GameObject obj, Material mat) 
+    private SlicedHull Slice(GameObject obj, Material mat)
     {
-        return obj.Slice(transform.position, transform.up, mat);
+        Quaternion originalRotation = transform.rotation;
+        transform.rotation *= Quaternion.Euler(90f, 0f, 0f); // Rotate 90 degrees around the X-axis
+        SlicedHull slicedHull = obj.Slice(transform.position, transform.up, mat);
+        transform.rotation = originalRotation; // Reset the rotation to the original state
+        return slicedHull;
     }
 
     void AddComponent(GameObject obj) {
