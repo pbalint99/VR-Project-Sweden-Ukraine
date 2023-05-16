@@ -1,6 +1,7 @@
 using EzySlice;
 using UnityEngine;
 using System.Collections;
+using Valve.VR.InteractionSystem;
 
 
 public class SliceObject : MonoBehaviour {
@@ -45,6 +46,8 @@ public class SliceObject : MonoBehaviour {
         rigidbody.isKinematic = kinematic;
         rigidbody.AddExplosionForce(explosionForce, obj.transform.position, exposionRadius);
         obj.tag = "CanSlice";
+        obj.layer = 6; //Grabbable
+        obj.AddComponent<Throwable>();
         //stroy(obj, 3f);
     }
 

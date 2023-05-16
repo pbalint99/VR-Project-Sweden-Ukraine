@@ -23,7 +23,7 @@ public class VRControllerMovement : MonoBehaviour {
         // Calculate the movement vector in local space
         Vector3 movementDir = Player.instance.hmdTransform.TransformDirection(new Vector3(thumbstickAction.axis.x, 0, thumbstickAction.axis.y));
         // Move the player in the direction of the thumbstick
-        transform.position += Vector3.ProjectOnPlane(Time.deltaTime * movementDir * 2.0f, Vector3.up);
+        transform.position += Vector3.ProjectOnPlane(Time.deltaTime * movementDir * 5.0f, Vector3.up);
 
         float distanceFromFloor = Vector3.Dot(cameraTransform.localPosition, Vector3.up);
         capsuleCollider.height = Mathf.Max(capsuleCollider.radius, distanceFromFloor);
