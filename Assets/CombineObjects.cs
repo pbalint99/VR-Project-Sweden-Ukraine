@@ -9,6 +9,8 @@ public class CombineObjects : MonoBehaviour {
 
     private int currentObjectsCount = 0;
 
+
+
     //private void OnCollisionExit(Collider other)
     //{
     //    if (other.CompareTag(targetTag))
@@ -34,6 +36,16 @@ public class CombineObjects : MonoBehaviour {
             {
                 Combine();
             }
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag(targetTag))
+        {
+            Debug.Log("Left combining stone: " + collision.gameObject.name);
+            targetObjects.Remove(collision.gameObject);
+            currentObjectsCount--;
         }
     }
 
