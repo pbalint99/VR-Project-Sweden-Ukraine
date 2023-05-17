@@ -30,7 +30,7 @@ public class CombineObjects : MonoBehaviour {
             targetObjects.Add(collision.gameObject);
             currentObjectsCount++;
 
-            if (currentObjectsCount >= requiredObjectsCount)
+            if (currentObjectsCount == requiredObjectsCount)
             {
                 Combine();
             }

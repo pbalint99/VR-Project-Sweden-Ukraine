@@ -29,6 +29,7 @@ public class SliceObject : MonoBehaviour {
 
             GameObject SlicedObjTop = sliceobj.CreateUpperHull(other.gameObject, materialSlicedSide);
             GameObject SlicedObjDown = sliceobj.CreateLowerHull(other.gameObject, materialSlicedSide);
+            
             Destroy(other.gameObject);
             AddComponent(SlicedObjTop);
             AddComponent(SlicedObjDown);
@@ -47,8 +48,11 @@ public class SliceObject : MonoBehaviour {
 
     void AddComponent(GameObject obj) {
         obj.AddComponent<BoxCollider>();
+
         var rigidbody = obj.AddComponent<Rigidbody>();
-        rigidbody.position = transform.position;
+        //Vector3 adjustedPosition = transform.position + transform.up * 1f;
+
+        //rigidbody.position = adjustedPosition;
         //rigidbody.useGravity = gravity;
         rigidbody.useGravity = true;
         rigidbody.isKinematic = kinematic;
