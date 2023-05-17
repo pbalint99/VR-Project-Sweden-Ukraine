@@ -9,7 +9,8 @@ public class CombineObjects : MonoBehaviour {
 
     private int currentObjectsCount = 0;
 
-
+    //public GameObject player;
+    //public float playerPushAmount = 1.1f;
 
     //private void OnCollisionExit(Collider other)
     //{
@@ -66,5 +67,7 @@ public class CombineObjects : MonoBehaviour {
 
         // Reset the counter
         currentObjectsCount = 0;
+
+        //player.transform.position = player.transform.position - player.transform.forward * playerPushAmount;
     }
 }
