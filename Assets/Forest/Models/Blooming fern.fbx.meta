@@ -7,6 +7,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Material.002
+    second: {fileID: 2100000, guid: d3c3c02d8b4f41f40941f0dd0e2b3301, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: free-png.ru-600
     second: {fileID: 2100000, guid: 1bab2c8ba265a9746810a73f81ad4739, type: 2}
   materials:
