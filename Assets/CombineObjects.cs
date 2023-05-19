@@ -5,20 +5,11 @@ public class CombineObjects : MonoBehaviour {
     public string targetTag = "TargetObject";
     public int requiredObjectsCount = 3;
     public GameObject replacementObject;
+    public GameObject confetti; // New confetti object reference
     private List<GameObject> targetObjects;
+    public GameObject circleEffect;
 
     private int currentObjectsCount = 0;
-
-    //public GameObject player;
-    //public float playerPushAmount = 1.1f;
-
-    //private void OnCollisionExit(Collider other)
-    //{
-    //    if (other.CompareTag(targetTag))
-    //    {
-    //        currentObjectsCount--;
-    //    }
-    //}
 
     private void Start()
     {
@@ -59,15 +50,32 @@ public class CombineObjects : MonoBehaviour {
         }
         targetObjects = new List<GameObject>();
 
-        // Enable the replacement object
+        // Activate confetti object
+        if (confetti != null)
+        {
+            confetti.SetActive(true);
+        }
+
+        // Enable the replacement object after a delay
         if (replacementObject != null)
         {
-            replacementObject.SetActive(true);
+            Invoke("ActivateReplacementObject", 1f);
         }
 
         // Reset the counter
         currentObjectsCount = 0;
+    }
 
-        //player.transform.position = player.transform.position - player.transform.forward * playerPushAmount;
+    private void ActivateReplacementObject()
+    {
+        // Enable the replacement object
+        replacementObject.SetActive(true);
+        // Turn off the CircleSpinAreaFire game object
+        // GameObject circleSpinAreaFire = GameObject.Find("CircleSpinAreaFire"); // Replace "CircleSpinAreaFire" with the actual name of the game object
+    if (circleEffect != null)
+    {
+        circleEffect.SetActive(false);
+    }
+        
     }
 }
