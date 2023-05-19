@@ -14,27 +14,33 @@ public class FlowerCrownOnHead : MonoBehaviour {
     bool attachedToHand = false;
     bool hasBeenGrabbed = false;
 
+    public bool isOnHead = true;
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name.Contains("Wreath of flowers") && attachedToHand == false && hasBeenGrabbed == true)
+        if (other.gameObject.name.Contains("Wreath of flowers"))
         {
-            GetComponent<MeshRenderer>().enabled = true;
-            Destroy(other.gameObject);
+            FlowerCrownOnHead otherFlower = other.gameObject.GetComponent<FlowerCrownOnHead>();
+            if (otherFlower.attachedToHand == false && otherFlower.hasBeenGrabbed == true)
+            {
+                GetComponent<MeshRenderer>().enabled = true;
+                Destroy(other.gameObject);
 
-            this.gameObject.AddComponent<Throwable>();
+                this.gameObject.AddComponent<Throwable>();
 
-            rigidbody = GetComponent<Rigidbody>();
-            interactable = GetComponent<Interactable>();
+                rigidbody = GetComponent<Rigidbody>();
+                interactable = GetComponent<Interactable>();
 
-            // Subscribe to the OnDetachedFromHand event
-            interactable.onDetachedFromHand += OnDetachedFromHand;
+                // Subscribe to the OnDetachedFromHand event
+                interactable.onDetachedFromHand += OnDetachedFromHand;
 
 
-            // Disable gravity when the player grabs the object
-            rigidbody.useGravity = false;
+                // Disable gravity when the player grabs the object
+                rigidbody.useGravity = false;
 
-            duplicatedObject = Instantiate(this.gameObject, transform.position, transform.rotation, transform.parent);
-            duplicatedObject.SetActive(false);
+                duplicatedObject = Instantiate(this.gameObject, transform.position, transform.rotation, transform.parent);
+                duplicatedObject.SetActive(false);
+            }
         }
     }
 
