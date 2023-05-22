@@ -1,13 +1,15 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class CombineObjects : MonoBehaviour {
+public class CombineObjects : MonoBehaviour
+{
     public string targetTag = "TargetObject";
     public int requiredObjectsCount = 3;
     public GameObject replacementObject;
     public GameObject confetti; // New confetti object reference
     private List<GameObject> targetObjects;
     public GameObject circleEffect;
+    public AudioClip ConfettiSound;
 
     private int currentObjectsCount = 0;
 
@@ -54,6 +56,7 @@ public class CombineObjects : MonoBehaviour {
         if (confetti != null)
         {
             confetti.SetActive(true);
+            PlayConfettiSound(); // Play the confetti sound
         }
 
         // Enable the replacement object after a delay
@@ -72,10 +75,21 @@ public class CombineObjects : MonoBehaviour {
         replacementObject.SetActive(true);
         // Turn off the CircleSpinAreaFire game object
         // GameObject circleSpinAreaFire = GameObject.Find("CircleSpinAreaFire"); // Replace "CircleSpinAreaFire" with the actual name of the game object
-    if (circleEffect != null)
+        if (circleEffect != null)
+        {
+            circleEffect.SetActive(false);
+        }
+    }
+
+
+
+    private void PlayConfettiSound()
     {
-        circleEffect.SetActive(false);
+        if (ConfettiSound != null)
+        {
+            AudioSource.PlayClipAtPoint(ConfettiSound, confetti.transform.position);
+        }
     }
-        
-    }
+
+
 }

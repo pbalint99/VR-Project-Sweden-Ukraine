@@ -14,6 +14,9 @@ public class SliceObject : MonoBehaviour {
     public AudioClip sliceSound;
     public AudioClip explosionSound;
 
+    public GameObject hitObject;
+
+
 
 
     private bool canSlice = true;
@@ -25,6 +28,18 @@ public class SliceObject : MonoBehaviour {
         canSlice = true;
     }
 
+    
+ void Start()
+{
+    if (hitObject != null)
+    {
+        ParticleSystem[] particleSystems = hitObject.GetComponentsInChildren<ParticleSystem>();
+        foreach (ParticleSystem particleSystem in particleSystems)
+        {
+            particleSystem.Stop();
+        }
+    }
+}
 
 
 
@@ -46,7 +61,10 @@ public class SliceObject : MonoBehaviour {
             AddComponent(SlicedObjDown);
 
 
+
             PlaySliceSound();
+            ActivateSliceParticles();
+
         }
     }
 
@@ -102,9 +120,22 @@ public class SliceObject : MonoBehaviour {
         }
     }
 
+  private void ActivateSliceParticles()
+{
+    if (hitObject != null)
 
+    {
+        Debug.Log("not null");
+        ParticleSystem[] particleSystems = hitObject.GetComponentsInChildren<ParticleSystem>();
+        foreach (ParticleSystem particleSystem in particleSystems)
+        {
+            particleSystem.Play();
+        }
+    }
 
-
-
+    else {
+        Debug.Log(" particle is null");
+    }
+}
 
 }
