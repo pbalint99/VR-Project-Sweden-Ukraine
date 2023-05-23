@@ -38,6 +38,7 @@ public class EnemyInteraction : MonoBehaviour {
 
     public AudioClip danceMusic;
     public AudioClip scream;
+    public AudioClip punch;
     AudioSource audioSource;
 
     // Start is called before the first frame update
@@ -66,10 +67,10 @@ public class EnemyInteraction : MonoBehaviour {
                 animator.SetBool("isWalking", false);
             }
         }
-        if(isScreaming) {
+        //if(isScreaming) {
             // Set the "isWalking" parameter of the animator to true
-            StartCoroutine(Scream());
-        }
+            
+        //}
 
         //If the player is close face them
         float distance = (player.transform.position - gameObject.transform.position).magnitude;
@@ -78,6 +79,11 @@ public class EnemyInteraction : MonoBehaviour {
             if(!hasScreamed) {
                 isScreaming = true;
                 hasScreamed = true;
+                StartCoroutine(Scream());
+                audioSource.clip = scream;
+                audioSource.time = 0f;
+                audioSource.volume = 1f;
+                audioSource.Play();
             }
             // Calculate the direction from the enemy to the player
             Vector3 direction = player.transform.position - transform.position;
@@ -112,6 +118,7 @@ public class EnemyInteraction : MonoBehaviour {
             // Play the audio clip
             audioSource.clip = danceMusic;
             audioSource.time = 11f;
+            audioSource.volume = 1f;
             audioSource.Play();
             return;
         }
@@ -127,13 +134,18 @@ public class EnemyInteraction : MonoBehaviour {
         Rigidbody otherRb = collision.gameObject.GetComponent<Rigidbody>();
         if (otherRb != null && Time.time >= hitTimer + hitCooldown) {
             // If the colliding object has a Rigidbody, increment the hit count and start the cooldown timer
-            if(name == "HandColliderRight(Clone)" || name == "HandColliderLeft(Clone)")
-                hitCount++;
-            else {
-                hitCount += 2;
-            }
+            //if(name == "HandColliderRight(Clone)" || name == "HandColliderLeft(Clone)")
+            //    hitCount++;
+            //else {
+            //    hitCount += 2;
+            //}
+            hitCount++;
             hitTimer = Time.time;
             StartCoroutine(ManageHitEffects());
+            audioSource.clip = punch;
+            audioSource.volume = 0.3f;
+            audioSource.time = 0.25f;
+            audioSource.Play();
         }
     }
 
@@ -159,8 +171,8 @@ public class EnemyInteraction : MonoBehaviour {
         animator.SetBool("isScreaming", true);
         //yield return new WaitForSeconds(0.25f);
         // Play the audio clip
-        audioSource.clip = scream;
-        audioSource.Play();
+        
+        Debug.Log("scream");
 
         yield return new WaitForSeconds(3.15f);
         animator.SetBool("isScreaming", false);
