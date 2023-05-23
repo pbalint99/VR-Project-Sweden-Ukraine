@@ -13,7 +13,7 @@ public class EnemyInteraction : MonoBehaviour {
     public ParticleSystem particleSystem;
     Animator animator;
     public float movementSpeed = 5.0f;
-    private bool isWalking = true;
+    private bool isWalking = false;
     bool isHit = false;
     public Image heartFill;
     public GameObject player;
@@ -21,40 +21,24 @@ public class EnemyInteraction : MonoBehaviour {
     public float rotationSpeed = 5.0f;
     bool facingPlayer = false;
 
-    public GameObject goal1;
-    public GameObject goal2;
-
-    int goalnumber = 1;
-
-    Transform goal;
-
-    bool isScreaming;
-    bool hasScreamed = false;
-    bool playerIsClose = false;
-    bool isDancing = false;
-
-    public GameObject flowerCrown;
-    public GameObject hat;
-
-    AudioSource audioSource;
-
     // Start is called before the first frame update
     void Start() {
         // Get the Renderer component and original color from the enemy object
         //renderer = GetComponent<Renderer>();
         //originalColor = renderer.material.color;
         animator = GetComponentInChildren<Animator>();
-        goal = goal1.transform;
-
-        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update() {
-        // if(!isWalking && Input.GetKeyDown(KeyCode.KeypadEnter)) {
-        //     isWalking = true;
-        // }
-        if(isDancing) return;
+        // If a hit has been registered and the cooldown period has passed, reset the color and hit registration
+        //if (isColliding && Time.time >= hitTimer + hitCooldown) {
+        //    //renderer.material.color = originalColor;
+        //    isColliding = false;
+        //}
+        if(!isWalking && Input.GetKeyDown(KeyCode.KeypadEnter)) {
+            isWalking = true;
+        }
 
         if(isWalking) {
             // Set the "isWalking" parameter of the animator to true
@@ -65,18 +49,10 @@ public class EnemyInteraction : MonoBehaviour {
                 animator.SetBool("isWalking", false);
             }
         }
-        if(isScreaming) {
-            StartCoroutine(Scream());
-        }
 
         //If the player is close face them
         float distance = (player.transform.position - gameObject.transform.position).magnitude;
         if(distance<distanceToNoticePlayer) {
-            playerIsClose = true;
-            if(!hasScreamed) {
-                isScreaming = true;
-                hasScreamed = true;
-            }
             // Calculate the direction from the enemy to the player
             Vector3 direction = player.transform.position - transform.position;
 
@@ -85,13 +61,12 @@ public class EnemyInteraction : MonoBehaviour {
 
             // Smoothly rotate the enemy toward the player using Lerp
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-        } else {
-            playerIsClose = false;
         }
 
         if(Input.GetKeyDown(KeyCode.K)) {
             hitCount = hitsToDie;
         }
+
         
     }
 
@@ -99,15 +74,6 @@ public class EnemyInteraction : MonoBehaviour {
     private void OnCollisionEnter(Collision collision) {
         int otherLayer = collision.gameObject.layer;
         string name = collision.gameObject.name;
-
-        if(collision.gameObject.tag == "Flower") {
-            isDancing = true;
-            animator.SetBool("isDancing",true);
-            flowerCrown.SetActive(true);
-            hat.SetActive(false);
-            Destroy(collision.gameObject);
-            return;
-        }
 
         // Do something based on the layer of the other game object
         if (otherLayer == LayerMask.NameToLayer("Grab") || name == "HandColliderRight(Clone)" || name == "HandColliderLeft(Clone)") {
@@ -134,7 +100,6 @@ public class EnemyInteraction : MonoBehaviour {
         particleSystem.Play();
         animator.SetBool("isHit", true);
         isHit = true;
-        isWalking = false;
         heartFill.fillAmount = 1 - (float)hitCount / hitsToDie;
         yield return new WaitForSeconds(1f);
         animator.SetBool("isHit", false);
@@ -145,48 +110,14 @@ public class EnemyInteraction : MonoBehaviour {
         {
             Destroy(this.gameObject);
         }
-        isWalking = true;
     }
 
-    private IEnumerator Scream() {
-        animator.SetBool("isScreaming", true);
-        audioSource.Play();
-        //yield return new WaitForSeconds(3.12f);
-        yield return new WaitForSeconds(0.25f);
-        yield return new WaitForSeconds(2.87f);
-        animator.SetBool("isScreaming", false);
-        isScreaming = false;
-        isWalking = true;
-    }
+    private void Walk() {
 
-    private void Walk() 
-    {
-        if(!playerIsClose) {
-            // Move the character forward in the direction it is facing
-            Vector3 direction = -(transform.position - goal.position).normalized;
-            transform.position += new Vector3(direction.x, 0, direction.z) * movementSpeed * Time.deltaTime;
+        // Move the character forward in the direction it is facing
+        transform.position += transform.forward * movementSpeed * Time.deltaTime;
 
-            Quaternion targetRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-
-            // Smoothly rotate the enemy toward the player using Lerp
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-
-            if(new Vector2(transform.position.x - goal.position.x, transform.position.z - goal.position.z).magnitude < 0.5) {
-                if (goalnumber == 1) {
-                    goal = goal2.transform;
-                    goalnumber = 2;
-                }
-                else {
-                    goal = goal1.transform;
-                    goalnumber = 1;
-                }
-            }
-        }
-        else {
-            Vector3 direction = -(transform.position - player.transform.position).normalized;
-            transform.position += new Vector3(direction.x, 0, direction.z) * movementSpeed * Time.deltaTime;
-        }
-
+        if (isHit) isWalking = false;
     }
 
 }
