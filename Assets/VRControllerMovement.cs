@@ -7,7 +7,6 @@ public class VRControllerMovement : MonoBehaviour {
     public SteamVR_Action_Vector2 thumbstickAction;  // The thumbstick action for this controller
     //public float movementSpeed = 3f;  // The speed at which the player moves
     public Transform cameraTransform;
-    public AudioSource walkingsound;
     private CapsuleCollider capsuleCollider;
 
     private void Start() {
@@ -30,15 +29,5 @@ public class VRControllerMovement : MonoBehaviour {
         capsuleCollider.height = Mathf.Max(capsuleCollider.radius, distanceFromFloor);
 
         capsuleCollider.center = cameraTransform.localPosition - 0.5f * distanceFromFloor * Vector3.up;
-
-        //play sound if moving
-
-        if (movementDir.magnitude > 0.2f && !walkingsound.isPlaying)
-        {
-            walkingsound.Play();
-        }
-        else if(movementDir.magnitude <= 0.2f && walkingsound.isPlaying) {
-            walkingsound.Stop();
-        }
     }
 }
