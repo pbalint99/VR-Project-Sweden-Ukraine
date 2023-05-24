@@ -14,6 +14,8 @@ public class FlowerCrownOnHead : MonoBehaviour {
     bool attachedToHand = false;
     bool hasBeenGrabbed = false;
 
+    public float crownHeight = 0.11f;
+
     public bool isOnHead = true;
 
     private void OnTriggerEnter(Collider other)
@@ -33,13 +35,13 @@ public class FlowerCrownOnHead : MonoBehaviour {
 
                 // Subscribe to the OnDetachedFromHand event
                 interactable.onDetachedFromHand += OnDetachedFromHand;
-
-
-                // Disable gravity when the player grabs the object
+                
                 rigidbody.useGravity = false;
 
                 duplicatedObject = Instantiate(this.gameObject, transform.position, transform.rotation, transform.parent);
                 duplicatedObject.SetActive(false);
+                duplicatedObject.GetComponent<Rigidbody>().isKinematic = true;
+                duplicatedObject.GetComponent<FlowerCrownOnHead>().isOnHead = true;
             }
         }
     }
@@ -56,6 +58,7 @@ public class FlowerCrownOnHead : MonoBehaviour {
         Destroy(duplicatedObject.GetComponent<Rigidbody>());
         Destroy(duplicatedObject.GetComponent<Interactable>());
         duplicatedObject.GetComponent<BoxCollider>().enabled = false;
+        duplicatedObject.GetComponent<FlowerCrownOnHead>().isOnHead = false;
 
         //Instantiate new one
         //GameObject flowerCrown = Instantiate(flowerCrownPrefab, VRCamera.transform, false);
@@ -65,5 +68,13 @@ public class FlowerCrownOnHead : MonoBehaviour {
     {
         attachedToHand = true;
         hasBeenGrabbed = true;
+    }
+
+    private void FixedUpdate()
+    {
+        if(isOnHead && !attachedToHand)
+        {
+            transform.position = VRCamera.transform.position + new Vector3(0.00999999978f, crownHeight, -0.0399999991f);
+        }
     }
 }

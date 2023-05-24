@@ -39,6 +39,7 @@ public class EnemyInteraction : MonoBehaviour {
     public AudioClip danceMusic;
     public AudioClip scream;
     public AudioClip punch;
+
     AudioSource audioSource;
 
     public GameObject fireworks;
@@ -123,6 +124,7 @@ public class EnemyInteraction : MonoBehaviour {
             audioSource.volume = 1f;
             audioSource.Play();
             fireworks.SetActive(true);
+
             return;
         }
 

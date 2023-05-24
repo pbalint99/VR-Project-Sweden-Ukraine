@@ -11,7 +11,6 @@ public class VRControllerMovement : MonoBehaviour {
     public AudioSource walkingsound;
     private CapsuleCollider capsuleCollider;
 
-
     private void Start()
     {
         capsuleCollider = GetComponent<CapsuleCollider>();
