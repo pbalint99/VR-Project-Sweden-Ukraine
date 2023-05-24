@@ -48,7 +48,7 @@ public class CombineObjects : MonoBehaviour
         // Destroy all objects with the target tag
         foreach (GameObject targetObject in targetObjects)
         {
-            Destroy(targetObject);
+            if(!targetObject.name.Contains("Wreath")) Destroy(targetObject);
         }
         targetObjects = new List<GameObject>();
 

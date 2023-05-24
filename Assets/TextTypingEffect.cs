@@ -9,19 +9,27 @@ public class TextTypingEffect : MonoBehaviour
     private TextMeshProUGUI textMeshPro;
     private string fullText;
     private string currentText;
+    bool hasStarted = false;
+
+    public AudioClip typeSound;
+    AudioSource audioSource;
 
     void Start()
     {
         textMeshPro = GetComponent<TextMeshProUGUI>();
         fullText = textMeshPro.text;
         textMeshPro.text = "";  // Clear the initial text
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        if(other.gameObject.layer == LayerMask.NameToLayer("Player") && !hasStarted)
         {
+            hasStarted = true;
+            audioSource.Play();
             StartCoroutine(ShowText());
+            //StartCoroutine(PlaySound());
         }
     }
 
@@ -31,7 +39,23 @@ public class TextTypingEffect : MonoBehaviour
         {
             currentText = fullText.Substring(0, i);
             textMeshPro.text = currentText;
+            
             yield return new WaitForSeconds(typingSpeed);
         }
+        audioSource.Stop();
     }
+
+    //IEnumerator PlaySound()
+    //{
+    //    for (int i = 0; i <= fullText.Length / 8; i++)
+    //    {
+    //        Debug.Log("TAKK");
+    //        if (audioSource != null)
+    //        {
+    //            audioSource.Play();
+    //        }
+
+    //        yield return new WaitForSeconds(typingSpeed * 4);
+    //    }
+    //}
 }

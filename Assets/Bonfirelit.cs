@@ -16,6 +16,10 @@ public class Bonfirelit : MonoBehaviour
         {
             // If no AudioSource component is found, add one
             audioSource = bonFire.AddComponent<AudioSource>();
+            audioSource.volume = 0.8f;
+            audioSource.maxDistance = 30f;
+            audioSource.spatialBlend = 1f;
+            audioSource.rolloffMode = AudioRolloffMode.Linear;
         }
         
         // Set the fire sound clip
