@@ -1214,6 +1214,7 @@ GameObject:
   - component: {fileID: 8291790912810638847}
   - component: {fileID: 8291790912810638840}
   - component: {fileID: 8291790912810638841}
+  - component: {fileID: 976098061268582760}
   m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
@@ -1352,7 +1353,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34d1cba5be8e01746aa15ac370ab7a34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typingSpeed: 0.1
+  typingSpeed: 0.03
+--- !u!65 &976098061268582760
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8291790912810638843}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2856.4524, y: 575.12744, z: 2247.7056}
+  m_Center: {x: -525.2462, y: -117.767715, z: -343.15857}
 --- !u!1 &8291790913618974016
 GameObject:
   m_ObjectHideFlags: 0

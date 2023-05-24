@@ -44,6 +44,8 @@ public class EnemyInteraction : MonoBehaviour {
 
     public GameObject fireworks;
 
+    public GameObject FinaleCanvas;
+
     // Start is called before the first frame update
     void Start() {
         // Get the Renderer component and original color from the enemy object
@@ -124,7 +126,7 @@ public class EnemyInteraction : MonoBehaviour {
             audioSource.volume = 1f;
             audioSource.Play();
             fireworks.SetActive(true);
-
+            FinaleCanvas.SetActive(true);
             return;
         }
 
@@ -159,7 +161,7 @@ public class EnemyInteraction : MonoBehaviour {
         animator.SetBool("isHit", true);
         isHit = true;
         isWalking = false;
-        heartFill.fillAmount = 1 - (float)hitCount / hitsToDie;
+        //heartFill.fillAmount = 1 - (float)hitCount / hitsToDie;
         yield return new WaitForSeconds(1f);
         animator.SetBool("isHit", false);
         particleSystem.Stop();
@@ -213,6 +215,26 @@ public class EnemyInteraction : MonoBehaviour {
             transform.position += new Vector3(direction.x, 0, direction.z) * movementSpeed * Time.deltaTime;
         }
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.name.Contains("Fern"))
+        {
+            isDancing = true;
+            animator.SetBool("isDancing", true);
+            flowerCrown.SetActive(true);
+            hat.SetActive(false);
+            Destroy(other.gameObject);
+            // Play the audio clip
+            audioSource.clip = danceMusic;
+            audioSource.time = 11f;
+            audioSource.volume = 1f;
+            audioSource.Play();
+            fireworks.SetActive(true);
+            FinaleCanvas.SetActive(true);
+            return;
+        }
     }
 
 }

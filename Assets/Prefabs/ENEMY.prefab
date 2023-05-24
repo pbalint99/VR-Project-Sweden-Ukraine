@@ -8087,6 +8087,10 @@ MonoBehaviour:
   goal2: {fileID: 0}
   flowerCrown: {fileID: 4804128979752554937}
   hat: {fileID: 2161469684846717510}
+  danceMusic: {fileID: 0}
+  scream: {fileID: 0}
+  punch: {fileID: 0}
+  fireworks: {fileID: 0}
 --- !u!136 &8465543624515706819
 CapsuleCollider:
   m_ObjectHideFlags: 0

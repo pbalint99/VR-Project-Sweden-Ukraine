@@ -15,6 +15,10 @@ PrefabInstance:
       propertyPath: m_fontSizeBase
       value: 45
       objectReference: {fileID: 0}
+    - target: {fileID: 8291790912810638841, guid: 3fac145d1ec0bfa47ab0fe45afe291ce, type: 3}
+      propertyPath: typingSpeed
+      value: 0.03
+      objectReference: {fileID: 0}
     - target: {fileID: 8291790912810638842, guid: 3fac145d1ec0bfa47ab0fe45afe291ce, type: 3}
       propertyPath: m_SizeDelta.x
       value: 807.49

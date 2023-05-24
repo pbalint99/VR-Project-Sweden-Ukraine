@@ -15,7 +15,14 @@ public class TextTypingEffect : MonoBehaviour
         textMeshPro = GetComponent<TextMeshProUGUI>();
         fullText = textMeshPro.text;
         textMeshPro.text = "";  // Clear the initial text
-        StartCoroutine(ShowText());
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            StartCoroutine(ShowText());
+        }
     }
 
     IEnumerator ShowText()
