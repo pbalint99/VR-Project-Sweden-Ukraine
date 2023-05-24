@@ -1,0 +1,107 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &791020837377827109
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8291790912810638840, guid: 3fac145d1ec0bfa47ab0fe45afe291ce, type: 3}
+      propertyPath: m_fontSize
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 8291790912810638840, guid: 3fac145d1ec0bfa47ab0fe45afe291ce, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 8291790912810638842, guid: 3fac145d1ec0bfa47ab0fe45afe291ce, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 807.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 8291790912810638842, guid: 3fac145d1ec0bfa47ab0fe45afe291ce, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 279.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8291790912810638842, guid: 3fac145d1ec0bfa47ab0fe45afe291ce, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 8291790912810638842, guid: 3fac145d1ec0bfa47ab0fe45afe291ce, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 87.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 8291790912810638842, guid: 3fac145d1ec0bfa47ab0fe45afe291ce, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -92.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8291790913618974023, guid: 3fac145d1ec0bfa47ab0fe45afe291ce, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 955.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 8291790913618974023, guid: 3fac145d1ec0bfa47ab0fe45afe291ce, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 339.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8291790913618974023, guid: 3fac145d1ec0bfa47ab0fe45afe291ce, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 8291790913618974023, guid: 3fac145d1ec0bfa47ab0fe45afe291ce, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 45.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 8291790913618974023, guid: 3fac145d1ec0bfa47ab0fe45afe291ce, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -84.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8401714256029529417, guid: 3fac145d1ec0bfa47ab0fe45afe291ce, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8401714256029529417, guid: 3fac145d1ec0bfa47ab0fe45afe291ce, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 140.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 8401714256029529417, guid: 3fac145d1ec0bfa47ab0fe45afe291ce, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 36.000736
+      objectReference: {fileID: 0}
+    - target: {fileID: 8401714256029529417, guid: 3fac145d1ec0bfa47ab0fe45afe291ce, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 108.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 8401714256029529417, guid: 3fac145d1ec0bfa47ab0fe45afe291ce, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.72393185
+      objectReference: {fileID: 0}
+    - target: {fileID: 8401714256029529417, guid: 3fac145d1ec0bfa47ab0fe45afe291ce, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8401714256029529417, guid: 3fac145d1ec0bfa47ab0fe45afe291ce, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.68987155
+      objectReference: {fileID: 0}
+    - target: {fileID: 8401714256029529417, guid: 3fac145d1ec0bfa47ab0fe45afe291ce, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8401714256029529417, guid: 3fac145d1ec0bfa47ab0fe45afe291ce, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8401714256029529417, guid: 3fac145d1ec0bfa47ab0fe45afe291ce, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -87.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 8401714256029529417, guid: 3fac145d1ec0bfa47ab0fe45afe291ce, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9210760873034510323, guid: 3fac145d1ec0bfa47ab0fe45afe291ce, type: 3}
+      propertyPath: m_Name
+      value: Talking NPC (1) Variant
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3fac145d1ec0bfa47ab0fe45afe291ce, type: 3}

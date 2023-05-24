@@ -41,6 +41,8 @@ public class EnemyInteraction : MonoBehaviour {
     public AudioClip punch;
     AudioSource audioSource;
 
+    public GameObject fireworks;
+
     // Start is called before the first frame update
     void Start() {
         // Get the Renderer component and original color from the enemy object
@@ -120,6 +122,7 @@ public class EnemyInteraction : MonoBehaviour {
             audioSource.time = 11f;
             audioSource.volume = 1f;
             audioSource.Play();
+            fireworks.SetActive(true);
             return;
         }
 
